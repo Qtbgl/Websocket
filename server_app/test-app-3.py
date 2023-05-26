@@ -39,10 +39,11 @@ async def connected(websocket):
     for task in pending:
         print('pending task :')
         print(task)
+        print(task.cancel())
         print()
-        task.cancel()
 
     print('进入第三阶段')
+    await game_s_x(websocket, 3, simple_decide)
 
     print('closed: ', websocket)
 

@@ -18,7 +18,7 @@ class ContextTest:
 
 
 def pose_s_generator():
-    c = ContextTest(100)
+    c = ContextTest(20)
     with c:
         for i in range(c.pics):  # TODO
             time.sleep(0.05)  # 50 ms 模拟推理时间

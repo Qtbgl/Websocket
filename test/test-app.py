@@ -6,7 +6,7 @@ import websockets
 async def handler(websocket):
     # global fut
     print("succeed: ", websocket)
-    message = await websocket.recv()  # 接收一次消息后，即关闭连接
+    message = await websocket.quit_trans()  # 接收一次消息后，即关闭连接
     print("msg: ", message)
     # fut.set_result('... world')
 
