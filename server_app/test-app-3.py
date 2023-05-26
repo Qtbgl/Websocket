@@ -2,7 +2,7 @@ import asyncio
 
 import websockets
 
-from server_app.game_status import game_s_x, simple_decide, GameNextDecision
+from server_app.game_status import game_s_x, simple_decide
 from server_app.pose_provide import pose_s_generator
 
 
