@@ -2,7 +2,7 @@ import json
 from json import JSONDecodeError
 
 from server_app_2.utils.Excepts import MsgNotFit
-from server_app_2.utils.RecvFits import RecvFits
+from server_app_2.utils.Context.RecvFits import RecvFits
 
 
 class RecvDecide:

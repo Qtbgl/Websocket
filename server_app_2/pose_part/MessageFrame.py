@@ -3,8 +3,10 @@ import json
 
 class MessageFrame:
     msg: str
-    on_error = False  # 任何出错
-    on_anim = False
+
+    def __init__(self):
+        self.on_error = False  # 任何出错
+        self.on_anim = False
 
     def json_str(self):
         try:

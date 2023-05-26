@@ -7,9 +7,11 @@ class AnimFrame(MessageFrame):
     anim_sec: float
     anim_cancelled: bool
 
-    on_anim = True
-    on_begin = False
-    on_end = False
+    def __init__(self):
+        super().__init__()
+        self.on_anim = True
+        self.on_begin = False
+        self.on_end = False
 
     def json_str(self):
         return super().json_str()
