@@ -10,17 +10,10 @@ class AnimFrame(MessageFrame):
     def __init__(self):
         super().__init__()
         self.on_anim = True
-        self.on_begin = False
         self.on_end = False
 
     def json_str(self):
         return super().json_str()
-
-
-def anim_begin():
-    am = AnimFrame()
-    am.on_begin = True
-    return am.json_str()
 
 
 def anim_end(is_cancel: bool):

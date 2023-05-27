@@ -20,5 +20,5 @@ class ContextTest:
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         print(f'simulate mediapipe: 完成/打断 + 关闭')
-        if exc_type is not None:
-            print('__exit__ Exception: ', exc_type, exc_val, exc_tb)
+        if exc_type is not None:  # 不忽略异常
+            print('simulate mediapipe: __exit__ Exception: ', exc_type, exc_val, exc_tb)
