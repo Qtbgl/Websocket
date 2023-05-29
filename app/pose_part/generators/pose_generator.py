@@ -7,9 +7,8 @@ from app.pose_part.solve.BoneRotate import BoneRotate
 
 def pose_generator(video):
     try:
-        seq = 0
-        for bz, sec in blazepose_generator(video):
-            print('pose generator 生成', seq)
+        for bz, seq, sec in blazepose_generator(video):
+            print('(pose generator) 生成', seq)
             lwm = bz.pose_world_landmarks.landmark
             ue_x = [each.x for each in lwm]
             ue_y = [-each.z for each in lwm]
@@ -21,7 +20,6 @@ def pose_generator(video):
             pose.upperarm_l = UEQuat(br.l_upperarm.as_quat())
             pose.lowerarm_l = UEQuat(br.l_lowerarm.as_quat())
 
-            seq += 1
             am = anim_pose(pose, seq, sec)
             yield am
 

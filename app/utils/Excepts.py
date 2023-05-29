@@ -7,7 +7,8 @@ class ConnQuit(Exception):
 
 
 class VideoCaptureFailed(Exception):
-    pass
+    def __init__(self, on_open):
+        self.on_open = on_open
 
 
 class ImgProcessExc(Exception):

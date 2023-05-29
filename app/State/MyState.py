@@ -31,8 +31,9 @@ class MyState:
                 await asyncio.sleep(0.000001)
 
             await self.websocket.send(anim_end())
-        except VideoCaptureFailed:
-            await self.websocket.send(anim_cancelled(msg=f'读取视频失败："{video}"'))
+        except VideoCaptureFailed as e:
+            msg = f'打开视频失败："{video}"' if e.on_open else f'读取视频帧时失败："{video}"'
+            await self.websocket.send(anim_cancelled(msg=msg))
         except ImgProcessExc:
             await self.websocket.send(anim_cancelled(msg=f'图像处理异常，视频："{video}"'))
         except asyncio.CancelledError:
