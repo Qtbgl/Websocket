@@ -1,15 +1,16 @@
 import time
 
-from app.pose_part.AnimFrame import anim_pose
+from app.pose_part.Frame.AnimFrame import anim_pose
+from app.pose_part.Frame.PoseData import PoseData
 
 
 def pose_simulator():
     with ContextTest():
         for i in range(100):  # TODO
             time.sleep(0.05)  # 50 ms 模拟推理时间
-            upperarm_l = {'x': 0, 'y': 1 + i, 'z': 2, 'w': 3}
-            lowerarm_l = {'x': 0, 'y': 1 + i, 'z': 2, 'w': 3}
-            pose = {'upperarm_l': upperarm_l, 'lowerarm_l': lowerarm_l}
+            pose = PoseData()
+            pose.upperarm_l = {'x': 0, 'y': 1, 'z': 2, 'w': 3}
+            pose.lowerarm_l = {'x': 0, 'y': 1, 'z': 2, 'w': 3}
             am = anim_pose(pose, i + 1, 0.02)
             yield am
 

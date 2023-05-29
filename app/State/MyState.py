@@ -1,6 +1,6 @@
 import asyncio
 
-from app.pose_part.AnimFrame import anim_end
+from app.pose_part.Frame.AnimFrame import anim_end
 from app.pose_part.pose_generator import pose_simulator
 from app.utils.Context.TransOkay import TransOkay
 
