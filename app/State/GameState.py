@@ -15,7 +15,7 @@ class GameState(MyState):
                 print('(IDLE) 接收到消息: ', info.msg)
 
             if info.to_transmit:
-                self.shed.load_task('IDLE', self.transmit())
+                self.shed.load_task('IDLE', self.transmit(info.video))
                 self.state_i = 1
 
             if info.to_quit_conn:

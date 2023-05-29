@@ -1,7 +1,7 @@
 import asyncio
 
 from app.pose_part.Frame.AnimFrame import anim_end
-from app.pose_part.pose_generator import pose_simulator
+from app.pose_part.FrameSourceChoose import FrameSourceChoose
 from app.utils.Context.TransOkay import TransOkay
 
 
@@ -9,6 +9,7 @@ class MyState:
     def __init__(self, websocket):
         self.websocket = websocket
         self.state_i = 0
+        self.frameSource = FrameSourceChoose()
 
     def state_deal(self, message):
         if self.state_i == 0:
@@ -22,10 +23,10 @@ class MyState:
     def tran_deal(self, message):
         pass
 
-    async def transmit(self):
+    async def transmit(self, video):
         try:
             with TransOkay('TRANSMIT') as okay:
-                for frame in pose_simulator():
+                for frame in self.frameSource(video):  # TODO
                     await self.websocket.send(frame)  # debug - 程序连接直接关闭后会卡在这里
                     await asyncio.sleep(0.000001)
 

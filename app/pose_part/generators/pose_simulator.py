@@ -1,16 +1,18 @@
 import time
 
+import numpy as np
+
 from app.pose_part.Frame.AnimFrame import anim_pose
-from app.pose_part.Frame.PoseData import PoseData
+from app.pose_part.Frame.PoseData import PoseData, UEQuat
 
 
-def pose_simulator():
+def pose_simulator(*args, **kwargs):
     with ContextTest():
         for i in range(100):  # TODO
             time.sleep(0.05)  # 50 ms 模拟推理时间
             pose = PoseData()
-            pose.upperarm_l = {'x': 0, 'y': 1, 'z': 2, 'w': 3}
-            pose.lowerarm_l = {'x': 0, 'y': 1, 'z': 2, 'w': 3}
+            pose.upperarm_l = UEQuat(np.array([1, 2, 3]))
+            pose.lowerarm_l = UEQuat(np.array([1, 2, 3]))
             am = anim_pose(pose, i + 1, 0.02)
             yield am
 
