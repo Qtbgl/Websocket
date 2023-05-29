@@ -18,9 +18,10 @@ class UEQuat(ToJsonStr):
             self.y = 0
             self.z = 0
             self.w = 0
-        elif arr.shape == (3,):
-            self.x = arr[0]
-            self.y = arr[1]
-            self.z = arr[2]
+        elif arr.shape == (4,):
+            self.x = float(arr[0])  # debug
+            self.y = float(arr[1])
+            self.z = float(arr[2])
+            self.w = float(arr[3])
         else:
-            raise TypeError
+            raise TypeError("UEQuat 构造异常，输入维度问题：", arr.shape)

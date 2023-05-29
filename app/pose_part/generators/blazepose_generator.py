@@ -1,13 +1,20 @@
 import cv2
 import mediapipe as mp
 
+from app.utils.Excepts import VideoCaptureFailed, ImgProcessExc
+
 
 def blazepose_generator(video):
-    try:
-        cap = cv2.VideoCapture(video)
+    print('(blazepose generator) 尝试读取视频：', video)
+    cap = cv2.VideoCapture(video)
+    if not cap.isOpened():
+        raise VideoCaptureFailed
+
+    try:  # 正常打开视频
         fps = cap.get(cv2.CAP_PROP_FPS)
         delta = 1 / fps
         sec = 0
+        print('(blazepose generator) 正在生成 mediapipe.solutions.pose')
         mp_pose = mp.solutions.pose
         with mp_pose.Pose(
                 static_image_mode=False,
@@ -17,5 +24,11 @@ def blazepose_generator(video):
                 image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
                 sec += delta
                 yield pose.process(image), sec
+
+    except Exception as e:
+        print('(blazepose generator) 捕获并转化异常：', type(e), e)
+        raise ImgProcessExc
+
     finally:
+        print('(blazepose generator) 退出关闭 VideoCapture：', cap)
         cap.release()

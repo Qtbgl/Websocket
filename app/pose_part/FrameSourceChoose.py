@@ -5,6 +5,7 @@ class FrameSourceChoose:
             self.__choose = pose_simulator
         else:
             from app.pose_part.generators.pose_generator import pose_generator
+            print('(FrameSourceChoose) : blazepose generator 加载完成')
             self.__choose = pose_generator
 
         self.from_simulate = from_simulate

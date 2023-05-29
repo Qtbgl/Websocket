@@ -13,19 +13,28 @@ class AnimFrame(MessageFrame):
         self.on_end = False
 
 
-def anim_end(is_cancel: bool):
-    am = AnimFrame()
-    am.on_end = True
-    am.anim_cancelled = is_cancel
-    return am.json_str()
-
-
 def anim_pose(pose_data: PoseData, seq_num: int, anim_sec: float):
     data = AnimData()
     data.anim_pose = pose_data
     data.anim_sequ = seq_num
     data.anim_sec = anim_sec
-    
+
     am = AnimFrame()
     am.anim_data = data
+    return am.json_str()
+
+
+def anim_end():
+    am = AnimFrame()
+    am.on_end = True
+    return am.json_str()
+
+
+def anim_cancelled(msg: str = None):
+    am = AnimFrame()
+    am.on_end = True
+    am.anim_cancelled = True
+    if msg:
+        am.msg = msg
+
     return am.json_str()

@@ -4,3 +4,11 @@ class MsgNotFit(Exception):
 
 class ConnQuit(Exception):
     pass
+
+
+class VideoCaptureFailed(Exception):
+    pass
+
+
+class ImgProcessExc(Exception):
+    pass
