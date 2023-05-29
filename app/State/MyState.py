@@ -23,11 +23,15 @@ class MyState:
         pass
 
     async def transmit(self):
-        with TransOkay('TRANSMIT') as okay:
-            for frame in pose_simulator():
-                await self.websocket.send(frame)  # debug - 程序连接直接关闭后会卡在这里
-                await asyncio.sleep(0.000001)
+        try:
+            with TransOkay('TRANSMIT') as okay:
+                for frame in pose_simulator():
+                    await self.websocket.send(frame)  # debug - 程序连接直接关闭后会卡在这里
+                    await asyncio.sleep(0.000001)
 
-            await self.websocket.send(anim_end(is_cancel=False))
+                await self.websocket.send(anim_end(is_cancel=False))
 
-        self.state_i = 0  # 任务结束或取消，改回标志位
+            self.state_i = 0  # 任务结束或取消，改回标志位
+          
+        except Exception as e:
+            print("捕获残余异常：", e)

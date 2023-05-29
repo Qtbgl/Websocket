@@ -15,8 +15,8 @@ async def connected(websocket):
 
     except ConnQuit:
         print('(websocket) 请求终止连接')
-    except:
-        print('(websocket) 捕获到其他异常')
+    except Exception as e:
+        print('(websocket) 捕获到其他异常：', type(e), e)
 
     print('closed: ', websocket)
 
