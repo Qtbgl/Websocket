@@ -9,6 +9,11 @@ class PoseData(ToJsonStr):
         self.upperarm_r = UEQuat()
         self.lowerarm_l = UEQuat()
         self.lowerarm_r = UEQuat()
+        
+        self.thigh_l = UEQuat()
+        self.thigh_r = UEQuat()
+        self.calf_l = UEQuat()
+        self.calf_r = UEQuat()
 
 
 class UEQuat(ToJsonStr):

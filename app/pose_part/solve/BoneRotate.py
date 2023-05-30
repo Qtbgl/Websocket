@@ -1,7 +1,14 @@
 import numpy as np
+from scipy.spatial.transform import Rotation
 
 from app.pose_part.solve.BodyPoint import BodyPoint
 from app.pose_part.solve.vector_sci import from2vector
+
+
+def offset_rot(rot: Rotation, vec: np.ndarray):
+    vec = vec / np.linalg.norm(vec)
+    r = Rotation.from_rotvec(np.pi * vec)
+    return r * rot
 
 
 class BoneRotate:
@@ -32,4 +39,8 @@ class BoneRotate:
         self.l_lowerarm = from2vector(self._lowerarm_l_v1, lowerarm_l_v2)  # ?结果可疑
         self.r_upperarm = from2vector(self._upperarm_r_v1, upperarm_r_v2)
         self.r_lowerarm = from2vector(self._lowerarm_r_v1, lowerarm_r_v2)
-        
+
+        self.r_upperarm = offset_rot(self.r_upperarm, upperarm_r_v2)
+        self.r_lowerarm = offset_rot(self.r_lowerarm, lowerarm_r_v2)
+        self.r_thigh = offset_rot(self.r_thigh, thigh_r_v2)
+        self.r_calf = offset_rot(self.r_calf, calf_r_v2)

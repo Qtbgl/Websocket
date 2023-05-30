@@ -3,6 +3,7 @@ from app.pose_part.Frame.PoseData import PoseData, UEQuat
 from app.pose_part.generators.blazepose_generator import blazepose_generator
 from app.pose_part.solve.BodyPoint import BodyPoint
 from app.pose_part.solve.BoneRotate import BoneRotate
+import time
 
 
 def pose_generator(video):
@@ -19,6 +20,13 @@ def pose_generator(video):
             pose = PoseData()
             pose.upperarm_l = UEQuat(br.l_upperarm.as_quat())
             pose.lowerarm_l = UEQuat(br.l_lowerarm.as_quat())
+            pose.upperarm_r = UEQuat(br.r_upperarm.as_quat())
+            pose.lowerarm_r = UEQuat(br.r_lowerarm.as_quat())
+            
+            pose.thigh_l = UEQuat(br.l_thigh.as_quat())
+            pose.calf_l = UEQuat(br.l_calf.as_quat())
+            pose.thigh_r = UEQuat(br.r_thigh.as_quat())
+            pose.calf_r = UEQuat(br.r_calf.as_quat())
 
             am = anim_pose(pose, seq, sec)
             yield am
